@@ -13,53 +13,13 @@
 
 {% block content %}
 
-<h1 class="text-center text-monospace">POPULAR MOVIES</h1>
-<div class="card-columns">
-  {% for m in movie %}
-    <div class="card">
-    <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
-    <div class="main">
-    <div class="content">
-      <h6>{{m.original_title}}</h6>
-      <div class="stars">
-        {% if m.vote_average >= 2 %}
-        <i class="fas fa-star " style="color:yellow"></i>
-        {% else %}
-        <i class="fas fa-star " style="color:gray"></i>
-        {% endif %}
-        {% if m.vote_average >= 4 %}
-        <i class="fas fa-star " style="color:yellow"></i>
-        {% else %}
-        <i class="fas fa-star " style="color:gray"></i>
-        {% endif %}
-        {% if m.vote_average >= 6 %}
-        <i class="fas fa-star " style="color:yellow"></i>
-        {% else %}
-        <i class="fas fa-star " style="color:gray"></i>
-        {% endif %}
-        {% if m.vote_average >= 8 %}
-        <i class="fas fa-star " style="color:yellow"></i>
-        {% else %}
-        <i class="fas fa-star " style="color:gray"></i>
-        {% endif %}
-        {% if m.vote_average >= 10 %}
-        <i class="fas fa-star " style="color:yellow"></i>
-        {% else %}
-        <i class="fas fa-star " style="color:gray"></i>
-        {% endif %}
-      </div>
-      <small> {{m.overview}}</small>
-        <button class="btn btn-success btn-sm watchNow" >Watch now</button>
-        <input type="text" class="video_id" value="{{m.original_title}}" />
-    </div>
-    </div>
-  </div>
-  {% endfor %}
-</div>
-<h1 class="text-center text-monospace">UPCOMMING MOVIES</h1>
+<!-- Top rated movies  -->
+
+
+<h1 class="text-center text-monospace">TOP RATED MOVIES</h1>
 
 <div class="card-columns">
-  {% for m in top_movies %}
+  {% for m in top_rated_movies %}
   <div class="card">
     <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
     <div class="main">
@@ -93,16 +53,22 @@
         {% endif %}
       </div>
       <small> {{m.overview}}</small>
-        <button class="btn btn-success btn-sm">Watch now</button>
+        <a href="{% url 'movie' movie_id=m.id %}">
+          <button class="btn btn-success btn-sm">Watch now</button>
+        </a>
     </div>
     </div>
   </div>
 {% endfor %}
-    </div>
-    <h1 class="text-center text-monospace">NOW-PLAYING MOVIES</h1>
+</div>
 
-    <div class="card-columns">
-{% for m in now_playing %}
+<!-- Now playing movies -->
+
+
+<h1 class="text-center text-monospace">NOW PLAYING MOVIES</h1>
+
+<div class="card-columns">
+{% for m in now_playing_movies %}
 <div class="card">
   <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
   <div class="main">
@@ -136,7 +102,109 @@
       {% endif %}
     </div>
     <small> {{m.overview}}</small>
-      <button class="btn btn-success btn-sm">Watch now</button>
+      <a href="{% url 'movie' movie_id=m.id %}">
+        <button class="btn btn-success btn-sm">Watch now</button>
+      </a>
+  </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+
+
+<!-- Upcoming movies -->
+
+
+<h1 class="text-center text-monospace">UPCOMING MOVIES</h1>
+
+<div class="card-columns">
+{% for m in upcoming_movies %}
+<div class="card">
+  <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
+  <div class="main">
+  <div class="content">
+    <h6>{{m.original_title}}</h6>
+    <div class="stars">
+      {% if m.vote_average >= 2 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+      {% if m.vote_average >= 4 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+      {% if m.vote_average >= 6 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+      {% if m.vote_average >= 8 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+      {% if m.vote_average >= 10 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+    </div>
+    <small> {{m.overview}}</small>
+      <a href="{% url 'movie' movie_id=m.id %}">
+        <button class="btn btn-success btn-sm">Watch now</button>
+      </a>
+  </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+
+
+<!-- Popular Movies -->
+
+
+<h1 class="text-center text-monospace">POPULAR MOVIES</h1>
+
+<div class="card-columns">
+{% for m in popular_movies %}
+<div class="card">
+  <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
+  <div class="main">
+  <div class="content">
+    <h6>{{m.original_title}}</h6>
+    <div class="stars">
+      {% if m.vote_average >= 2 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+      {% if m.vote_average >= 4 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+      {% if m.vote_average >= 6 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+      {% if m.vote_average >= 8 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+      {% if m.vote_average >= 10 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+    </div>
+    <small> {{m.overview}}</small>
+      <a href="{% url 'movie' movie_id=m.id %}">
+        <button class="btn btn-success btn-sm">Watch now</button>
+      </a>
   </div>
   </div>
 </div>

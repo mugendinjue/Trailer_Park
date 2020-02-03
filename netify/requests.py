@@ -3,35 +3,26 @@ from decouple import config
 import json
 import re
 
-# The movie url
+# The movies url
+
+# Get movie by category url
 
 movie_url ='https://api.themoviedb.org/3/movie/{}?api_key={}'
 
+# Get movie youtube video id
+
+movie_trailer='https://api.themoviedb.org/3/movie/{}/videos?api_key={}'
+
 # The youtube url
-youtube='https://www.googleapis.com/youtube/v3/search?part=snippet&q={}&key={}' 
+# plays the video id
+youtube='https://www.googleapis.com/youtube/v3/search?part=snippet&q={}&key={}'
 
 # The API keys
 
 api_key = config('MOVIE_API_KEY')
 key = config('YOUTUBE_API_KEY')
 
-# A class that splits and clean the urls to search
-
-class Spliter:
-  def __init__(self):
-    pass
-  def id_from_url(self,url:str):
-    return url.rsplit("=",1)[1]
-  def clean_title(self,title):
-    title = re.sub('[\W_:,]',"_",title)
-    return title.lower()
-
-# calls the splitter class
-
-hah = Spliter()
-
-
-# The movie blueprint
+# The movie blueprint 
 
 class Movies():
   def __init__(self,popularity,vote_count,poster_path,id,original_language,original_title,vote_average,overview,release_date):
@@ -69,3 +60,13 @@ def getMovies(category):
     movie_object = Movies(popularity,vote_count,poster_path,id,original_language,original_title,vote_average,overview,release_date)
     list.append(movie_object)
   return list
+
+# functtion that get the first trailer id
+def trailer_id(movie_id):
+
+  trailers = movie_trailer.format(int(movie_id),api_key)
+  response = requests.get(trailers)
+  data = response.json()
+  the_id = data['results'][0].get('key')
+
+  return the_id
