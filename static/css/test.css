@@ -1,0 +1,24 @@
+body{
+  background-color: black;
+}
+.title{
+  color: white;
+  font-family: 'Ubuntu', sans-serif;
+}
+.poster{
+  background-color: rgba(0,0,0,1);
+  color: white;
+}
+.overview{
+  color: white;
+}
+.genre{
+  color: white;
+}
+.stars{
+  display: flex;
+  text-align: center;
+}
+.reviews{
+  color: white;
+}
