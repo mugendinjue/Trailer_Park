@@ -1,0 +1,35 @@
+.content{
+  padding: 20px;
+  position:absolute;
+  top:0;
+  height:100%;
+  width:100%;
+  display: flex;
+  flex-direction:column;
+  justify-content: flex-end;
+  background: linear-gradient(to top, rgba(0,0,0,.9) 0%, rgba(0,0,0,.1) 70%);
+  transition: 10s;
+  color:white;
+}
+.card{
+  transition: 10s;
+
+}
+.main{
+  transition: 10s;
+  display:none;
+}
+.card:hover .main {
+  display:flex;
+  transition: 10s;
+
+}
+.fas{
+  width:70px;
+  padding: 20px;
+  margin:0 -22px;
+
+}
+.stars{
+  display: flex;
+}

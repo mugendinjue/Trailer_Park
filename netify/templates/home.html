@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+
+{{block.super}}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+
+{% endblock styles %}
+
+{% block content %}
+
+<h1 class="text-center text-monospace">POPULAR MOVIES</h1>
+<div class="card-columns">
+  {% for m in movie %}
+    <div class="card">
+    <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
+    <div class="main">
+    <div class="content">
+      <h6>{{m.original_title}}</h6>
+      <div class="stars">
+        {% if m.vote_average >= 2 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if m.vote_average >= 4 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if m.vote_average >= 6 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if m.vote_average >= 8 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if m.vote_average >= 10 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+      </div>
+      <small> {{m.overview}}</small>
+        <button class="btn btn-success btn-sm watchNow" >Watch now</button>
+        <input type="text" class="video_id" value="{{m.original_title}}" />
+    </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<h1 class="text-center text-monospace">UPCOMMING MOVIES</h1>
+
+<div class="card-columns">
+  {% for m in top_movies %}
+  <div class="card">
+    <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
+    <div class="main">
+    <div class="content">
+      <h6>{{m.original_title}}</h6>
+      <div class="stars">
+        {% if m.vote_average >= 2 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if m.vote_average >= 4 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if m.vote_average >= 6 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if m.vote_average >= 8 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if m.vote_average >= 10 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+      </div>
+      <small> {{m.overview}}</small>
+        <button class="btn btn-success btn-sm">Watch now</button>
+    </div>
+    </div>
+  </div>
+{% endfor %}
+    </div>
+    <h1 class="text-center text-monospace">NOW-PLAYING MOVIES</h1>
+
+    <div class="card-columns">
+{% for m in now_playing %}
+<div class="card">
+  <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
+  <div class="main">
+  <div class="content">
+    <h6>{{m.original_title}}</h6>
+    <div class="stars">
+      {% if m.vote_average >= 2 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+      {% if m.vote_average >= 4 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+      {% if m.vote_average >= 6 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+      {% if m.vote_average >= 8 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+      {% if m.vote_average >= 10 %}
+      <i class="fas fa-star " style="color:yellow"></i>
+      {% else %}
+      <i class="fas fa-star " style="color:gray"></i>
+      {% endif %}
+    </div>
+    <small> {{m.overview}}</small>
+      <button class="btn btn-success btn-sm">Watch now</button>
+  </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}
