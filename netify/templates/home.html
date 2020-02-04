@@ -23,7 +23,7 @@
   <div class="card">
     <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
     <div class="main">
-    <div class="content">
+    <div class="content text-monospace">
       <h6>{{m.original_title}}</h6>
       <div class="stars">
         {% if m.vote_average >= 2 %}
@@ -52,9 +52,9 @@
         <i class="fas fa-star " style="color:gray"></i>
         {% endif %}
       </div>
-      <small> {{m.overview}}</small>
+      <small class="text-monospace"> {{m.overview}}</small>
         <a href="{% url 'movie' movie_id=m.id %}">
-          <button class="btn btn-success btn-sm">Watch Trailer Now</button>
+          <button class="btn btn-success btn-sm text-monospace">Watch Trailer Now</button>
         </a>
     </div>
     </div>
@@ -72,7 +72,7 @@
 <div class="card">
   <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
   <div class="main">
-  <div class="content">
+  <div class="content text-monospace">
     <h6>{{m.original_title}}</h6>
     <div class="stars">
       {% if m.vote_average >= 2 %}
@@ -101,9 +101,9 @@
       <i class="fas fa-star " style="color:gray"></i>
       {% endif %}
     </div>
-    <small> {{m.overview}}</small>
+    <small class="text-monospace"> {{m.overview}}</small>
       <a href="{% url 'movie' movie_id=m.id %}">
-        <button class="btn btn-success btn-sm">Watch Trailer Now</button>
+        <button class="btn btn-success btn-sm text-monospace">Watch Trailer Now</button>
       </a>
   </div>
   </div>
@@ -122,7 +122,7 @@
 <div class="card">
   <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
   <div class="main">
-  <div class="content">
+  <div class="content text-monospace">
     <h6>{{m.original_title}}</h6>
     <div class="stars">
       {% if m.vote_average >= 2 %}
@@ -151,9 +151,9 @@
       <i class="fas fa-star " style="color:gray"></i>
       {% endif %}
     </div>
-    <small> {{m.overview}}</small>
+    <small class="text-monospace"> {{m.overview}}</small>
       <a href="{% url 'movie' movie_id=m.id %}">
-        <button class="btn btn-success btn-sm">WWatch Trailer Now</button>
+        <button class="btn btn-success btn-sm text-monospace">WWatch Trailer Now</button>
       </a>
   </div>
   </div>
@@ -172,7 +172,7 @@
 <div class="card">
   <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
   <div class="main">
-  <div class="content">
+  <div class="content text-monospace">
     <h6>{{m.original_title}}</h6>
     <div class="stars">
       {% if m.vote_average >= 2 %}
@@ -201,9 +201,9 @@
       <i class="fas fa-star " style="color:gray"></i>
       {% endif %}
     </div>
-    <small> {{m.overview}}</small>
+    <small class="text-monospace"> {{m.overview}}</small>
       <a href="{% url 'movie' movie_id=m.id %}">
-        <button class="btn btn-success btn-sm">Watch Trailer Now</button>
+        <button class="btn btn-success btn-sm text-monospace">Watch Trailer Now</button>
       </a>
   </div>
   </div>

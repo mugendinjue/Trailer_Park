@@ -11,7 +11,7 @@
 
 {% block content %}
 
-<h1 class="text-center title">
+<h1 class="text-center text-monospace title">
   {{the_movie_details.original_title}}
 </h1>
 
@@ -41,10 +41,10 @@
           {% endif %}
         </div>
       </div>
-      <p class="text-center genre">
+      <p class="text-center text-monospace genre">
         Production Companies
       </p>
-      <p class="text-center genre">
+      <p class="text-center text-monospace genre">
         {% if production_companies_name %}
         {% for company in production_companies_name %}
 
@@ -55,23 +55,23 @@
       </p>
     </div>
     <div class="col-md-4 mt-3 overview">
-      <p class="text-center">
+      <p class="text-center text-monospace">
         {{the_movie_details.title|upper}}
       </p>
-      <p class="text-center ">
+      <p class="text-center text-monospace">
         {{the_movie_details.overview|title}}
       </p>
-      <p class="text-center">
+      <p class="text-center text-monospace">
         To view the original homepage of {{the_movie_details.original_title}} got to
         <a href="{{the_movie_details.homepage}}" target="blank">{{the_movie_details.homepage}}</a>
       </p>
-      <p class="text-center">
+      <p class="text-center text-monospace">
         Duration : {{the_movie_details.runtime}} mins
       </p>
-      <p class="text-center">
+      <p class="text-center text-monospace">
         Release Date : {{the_movie_details.release_date}}
       </p>
-      <p class="text-center">
+      <p class="text-center text-monospace">
         Countries Producers :
         {% if production_countries %}
         {% for country in production_countries %}
@@ -83,10 +83,10 @@
       </p>
     </div>
     <div class="col-md-4 mt-4 genre">
-      <p class="text-center">
+      <p class="text-center text-monospace">
         Genres :
       </p>
-      <p class="text-center">
+      <p class="text-center text-monospace">
         {% if all_genres %}
         {% for genre in all_genres %}
 
@@ -95,10 +95,10 @@
         {% endfor %}
         {% endif %}
       </p>
-      <p class="text-center">
+      <p class="text-center text-monospace">
         Original Language : "{{the_movie_details.original_language}}"
       </p>
-      <p class="text-center">
+      <p class="text-center text-monospace">
         Status : {{the_movie_details.status}}
       </p>
 
@@ -132,10 +132,10 @@
         {% endif %}
       </div>
 
-      <p class="text-center">
+      <p class="text-center text-monospace">
         Ratings : {{the_movie_details.vote_average}}
       </p>
-      <p class="text-center">
+      <p class="text-center text-monospace">
         Total votes : {{the_movie_details.vote_count}}
       </p>
     </div>
@@ -145,31 +145,31 @@
 
 <!-- Movie Reviews -->
 
+{% if movie_reviews %}
 <div class="container mt-3">
   <h1 class="text-center text-monospace">
     {{the_movie_details.original_title|title}} Reviews
   </h1>
   <div class="row reviews">
-    {% if movie_reviews %}
+
     {% for review in movie_reviews %}
-    
+
     <div class="card-body">
-      <p>
+      <p class="text-monospace" > 
         {{review.author}}
       </p>
-      <P>
+      <P class="text-monospace" >
         {{review.content|slice:"300"}} ...
       </P>
-      <P>
+      <P class="text-monospace" >
         <a href="{{review.url}}" target="_blank" rel="noopener noreferrer"> Full Review</a>
       </P>
     </div>
 
     {% endfor %}
-    {% endif %}
   </div>
 </div>
-
+{% endif %}
 
 <!-- Similar Movies  -->
 
@@ -181,7 +181,7 @@
     <div class="card">
       <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
       <div class="main">
-        <div class="content">
+        <div class="content text-monospace">
           <h6>{{m.original_title}}</h6>
           <div class="stars">
             {% if m.vote_average >= 2 %}
@@ -210,9 +210,9 @@
             <i class="fas fa-star " style="color:gray"></i>
             {% endif %}
           </div>
-          <small> {{m.overview}}</small>
+          <small class="text-monospace"> {{m.overview}}</small>
           <a href="{% url 'movie' movie_id=m.id %}">
-            <button class="btn btn-success btn-sm">Watch Trailer Now</button>
+            <button class="btn btn-success btn-sm text-monospace">Watch Trailer Now</button>
           </a>
         </div>
       </div>
