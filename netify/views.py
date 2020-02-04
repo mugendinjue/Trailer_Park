@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .requests import getMovies,trailer_id,movie_details,imdb,get_similar_movies,get_movie_reviews
 from .series import getSeries,series_trailer_id,series_details,get_series_reviews
 
@@ -22,7 +22,34 @@ class Season:
     self.season_number = season_number
 
 
+def search(request):
+
+  if 'search_term' in request.GET and request.GET["search_term"]:
+    movie_name = request.GET.get('search_term')
+
+    print(movie_name) 
+
+    context = {
+
+    }
+
+    return render(request,'search.html',context)
+  else:
+    return redirect(index)
+
+
+def index(request):
+
+  context = {
+
+  }
+
+  return render(request,'index.html',context)
+
+
 # MOVIES
+
+
 
 # The home view function with movie posters
 
