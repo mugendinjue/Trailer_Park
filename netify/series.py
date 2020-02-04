@@ -28,9 +28,12 @@ def getSeries(url,category):
     vote_average = new_movie.get('vote_average')
     overview = new_movie.get('overview')
     release_date = new_movie.get('release_date')
-
-    movie_object = Series(popularity,vote_count,poster_path,id,original_language,original_name,vote_average,overview,release_date)
-    list.append(movie_object)
+    if poster_path != None:
+      movie_object = Series(popularity,vote_count,poster_path,id,original_language,original_name,vote_average,overview,release_date)
+      list.append(movie_object)
+    else:
+      continue
+    
   return list
 
 

@@ -61,9 +61,12 @@ def getMovies(category):
     vote_average = new_movie.get('vote_average')
     overview = new_movie.get('overview')
     release_date = new_movie.get('release_date')
-
-    movie_object = Movies(popularity,vote_count,poster_path,id,original_language,original_title,vote_average,overview,release_date)
-    list.append(movie_object)
+    if poster_path != None:
+      movie_object = Movies(popularity,vote_count,poster_path,id,original_language,original_title,vote_average,overview,release_date)
+      list.append(movie_object)
+    else:
+      continue
+    
   return list
 
 # function that get the first trailer id
@@ -120,9 +123,12 @@ def get_similar_movies(movie_id):
     vote_average = new_movie.get('vote_average')
     overview = new_movie.get('overview')
     release_date = new_movie.get('release_date')
+    if poster_path != None:
+      movie_object = Movies(popularity,vote_count,poster_path,id,original_language,original_title,vote_average,overview,release_date)
+      list.append(movie_object)
+    else:
+      continue
 
-    movie_object = Movies(popularity,vote_count,poster_path,id,original_language,original_title,vote_average,overview,release_date)
-    list.append(movie_object)
   return list
   
 def get_movie_reviews(movie_id):
@@ -135,8 +141,10 @@ def get_movie_reviews(movie_id):
     author = review.get('author')
     content = review.get('content')
     url = review.get('url')
-
-    new_review = Reviews(author = author, content = content, url = url)
-    reviews.append(new_review)
+    if content != None and author != None:
+      new_review = Reviews(author = author, content = content, url = url)
+      reviews.append(new_review)
+    else:
+      continue
 
   return reviews

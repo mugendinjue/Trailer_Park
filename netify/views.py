@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from .requests import getMovies,trailer_id,movie_details,imdb,get_similar_movies,get_movie_reviews
 from .series import getSeries,series_trailer_id,series_details,get_series_reviews
-
+from .search import searchMovies,searchSeries
 
 
 
@@ -13,6 +13,8 @@ class Company:
     self.logo = logo
     self.origin = origin
 
+# seasons object
+
 class Season:
   def __init__(self,air_date,episode_count,name,poster_path,season_number):
     self.air_date = air_date
@@ -21,16 +23,23 @@ class Season:
     self.poster_path = 'https://image.tmdb.org/t/p/w500/'+poster_path
     self.season_number = season_number
 
+# search_url
+
+movie_search_url='https://api.themoviedb.org/3/search/{}?api_key={}&query={}'
+movie_search = 'movie'
+tv_search = 'tv'
 
 def search(request):
 
   if 'search_term' in request.GET and request.GET["search_term"]:
-    movie_name = request.GET.get('search_term')
-
-    print(movie_name) 
+    search_name = request.GET.get('search_term')
+    found_movies = searchMovies(movie_search_url,movie_search,search_name)
+    found_series = searchSeries(movie_search_url,tv_search,search_name)
 
     context = {
-
+      'found_movies':found_movies,
+      'found_series':found_series,
+      'search_name':search_name
     }
 
     return render(request,'search.html',context)

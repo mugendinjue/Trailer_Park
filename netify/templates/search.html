@@ -3,6 +3,8 @@
 
 {% block styles %}
 {{block.super}}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
 
 {% endblock styles %}
 
@@ -15,11 +17,100 @@
 
 {% block content %}
 
-<div class="container">
-  <h1 class="text-center">
-    results are as follows
-  </h1>
-</div>
+{% if found_movies or found_series %}
 
+<div class="card-columns">
+  {% for m in found_movies %}
+  <div class="card">
+    <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
+    <div class="main">
+    <div class="content text-monospace">
+      <h6>{{m.original_title}}</h6>
+      <div class="stars">
+        {% if m.vote_average >= 2 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if m.vote_average >= 4 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if m.vote_average >= 6 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if m.vote_average >= 8 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if m.vote_average >= 10 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+      </div>
+      <small class="text-monospace"> {{m.overview}}</small>
+        <a href="{% url 'movie' movie_id=m.id %}">
+          <button class="btn btn-success btn-sm text-monospace">Watch Trailer Now</button>
+        </a>
+    </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for m in found_series %}
+    <div class="card">
+      <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
+      <div class="main">
+      <div class="content text-monospace">
+        <h6>{{m.original_name}}</h6>
+        <div class="stars">
+          {% if m.vote_average >= 2 %}
+          <i class="fas fa-star " style="color:yellow"></i>
+          {% else %}
+          <i class="fas fa-star " style="color:gray"></i>
+          {% endif %}
+          {% if m.vote_average >= 4 %}
+          <i class="fas fa-star " style="color:yellow"></i>
+          {% else %}
+          <i class="fas fa-star " style="color:gray"></i>
+          {% endif %}
+          {% if m.vote_average >= 6 %}
+          <i class="fas fa-star " style="color:yellow"></i>
+          {% else %}
+          <i class="fas fa-star " style="color:gray"></i>
+          {% endif %}
+          {% if m.vote_average >= 8 %}
+          <i class="fas fa-star " style="color:yellow"></i>
+          {% else %}
+          <i class="fas fa-star " style="color:gray"></i>
+          {% endif %}
+          {% if m.vote_average >= 10 %}
+          <i class="fas fa-star " style="color:yellow"></i>
+          {% else %}
+          <i class="fas fa-star " style="color:gray"></i>
+          {% endif %}
+        </div>
+        <small class="text-monospace"> {{m.overview}}</small>
+          <a href="{% url 'series_tube' movie_id=m.id %}">
+            <button class="btn btn-success btn-sm text-monospace">Watch Trailer Now</button>
+          </a>
+      </div>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+  
+{% else %}
+
+<h1 class="text-center text-monospace">
+  No Results for {{search_name}} Found
+</h1>
+
+{% endif %}
 
 {% endblock %}
