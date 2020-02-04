@@ -2,6 +2,8 @@ import requests
 from decouple import config
 import json
 import re
+from .models import Movies,Reviews
+
 
 # The movies url
 
@@ -39,29 +41,6 @@ youtube='https://www.googleapis.com/youtube/v3/search?part=snippet&q={}&key={}'
 
 api_key = config('MOVIE_API_KEY')
 key = config('YOUTUBE_API_KEY')
-
-# The movie blueprint 
-
-class Movies():
-  def __init__(self,popularity,vote_count,poster_path,id,original_language,original_title,vote_average,overview,release_date):
-    self.popularity = popularity
-    self.vote_count = vote_count
-    self.poster_path = 'https://image.tmdb.org/t/p/w500/'+poster_path
-    self.id = id
-    self.original_language = original_language
-    self.original_title = original_title
-    self.vote_average = vote_average
-    self.overview = overview
-    self.release_date = release_date
-
-
-class Reviews:
-  def __init__(self,author,content,url):
-    self.author = author
-    self.content = content
-    self.url = url
-
-  
     
 # The function that sends the request to movie database api
 

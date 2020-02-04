@@ -9,6 +9,12 @@
 
 {% endblock %}
 
+{% block navbar %}
+
+{% include 'navbar.html' %}
+
+{% endblock %}
+
 {% block content %}
 
 <h1 class="text-center text-monospace title">
@@ -31,7 +37,7 @@
           {% if the_movie_details.backdrop_path %}
 
           <img src="https://image.tmdb.org/t/p/w500/{{the_movie_details.backdrop_path}}"
-            alt="{{the_movie_details.backdrop_path}}" height="200" width=100% class="card-img">
+            alt="{{the_movie_details.backdrop_path}}" height=100% width=100% class="card-img">
 
           {% else %}
 
@@ -98,9 +104,15 @@
       <p class="text-center text-monospace">
         Original Language : "{{the_movie_details.original_language}}"
       </p>
+      {% if the_movie_details.status == Released %}
+      <p class="text-center text-monospace" style="color: green;">
+        Status : {{the_movie_details.status}}
+      </p>
+      {% else %}
       <p class="text-center text-monospace">
         Status : {{the_movie_details.status}}
       </p>
+      {% endif %}
 
       <!-- rating stars -->
 
@@ -173,6 +185,7 @@
 
 <!-- Similar Movies  -->
 
+{% if similar_movies %}
 <div class="container">
   <h1 class="text-center text-monospace">SIMILAR MOVIES</h1>
 
@@ -220,7 +233,7 @@
     {% endfor %}
   </div>
 </div>
-
+{% endif %}
 
 <!-- Youtube Iframe -->
 

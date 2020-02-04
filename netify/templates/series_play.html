@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block styles %}
+{{block.super}}
+
+{% endblock styles %}
+
+{% block content %}
+
+{% block navbar %}
+
+
+{% endblock %}
+
+
+<div class="container-fluid">
+
+  <div id="player" class="mt-3">
+
+  </div>
+
+</div>
+
+
+<!-- Youtube Iframe -->
+
+<script>
+  // Gets the specific device width
+
+  var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+  // Gets the specific device height
+
+  var height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+
+  var tag = document.createElement('script');
+
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var player;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: height * 0.88,
+      width: width * 0.96,
+      videoId: '{{youtube_video_series_id}}',
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+
+  function onPlayerReady(event) {
+    event.target.playVideo();
+  }
+  var done = false;
+
+  function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.PLAYING && !done) {
+      setTimeout(stopVideo, null);
+      done = true;
+    }
+  }
+
+  function stopVideo() {
+    player.stopVideo();
+  }
+</script>
+
+{% endblock %}
+

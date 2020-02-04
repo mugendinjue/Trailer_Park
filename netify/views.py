@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .requests import getMovies,trailer_id,movie_details,imdb,get_similar_movies,get_movie_reviews
+from .series import getSeries,series_trailer_id,series_details
+
 
 
 
@@ -10,6 +12,9 @@ class Company:
     self.name = name
     self.logo = logo
     self.origin = origin
+
+
+# MOVIES
 
 # The home view function with movie posters
 
@@ -87,3 +92,47 @@ def tube(request,movie_id):
   }
 
   return render(request,'test.html',context)
+
+
+
+# SERIES
+
+# url
+
+series_url='https://api.themoviedb.org/3/tv/{}?api_key={}'
+
+series_details_url='https://api.themoviedb.org/3/tv/{}?api_key={}'
+
+series_tube_id='https://api.themoviedb.org/3/tv/{}/videos?api_key={}'
+
+# Searies view function
+
+def series(request):
+
+  top_rated_series = getSeries(series_url,'top_rated')
+  now_playing_series = getSeries(series_url,'on_the_air')
+  upcoming_series = getSeries(series_url,'airing_today')
+  popular_series = getSeries(series_url,'popular')
+
+  context = {
+    "top_rated_series":top_rated_series,
+    "now_playing_series":now_playing_series,
+    "upcoming_series":upcoming_series,
+    "popular_series":popular_series,
+  }
+
+  return render(request,'series.html',context)
+
+
+# Trailer
+def series_tube(request,movie_id):
+
+  series_id_details = series_details(series_details_url,movie_id)
+  youtube_video_series_id = series_trailer_id(series_tube_id,movie_id)
+  print(youtube_video_series_id)
+  context = {
+    'series_id_details':series_id_details,
+    'youtube_video_series_id':youtube_video_series_id,
+  }
+
+  return render(request,'series_play.html',context)
