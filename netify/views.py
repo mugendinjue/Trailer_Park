@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .requests import getMovies,trailer_id,movie_details,imdb,get_similar_movies,get_movie_reviews
-from .series import getSeries,series_trailer_id,series_details
+from .series import getSeries,series_trailer_id,series_details,get_series_reviews
 
 
 
@@ -12,6 +12,14 @@ class Company:
     self.name = name
     self.logo = logo
     self.origin = origin
+
+class Season:
+  def __init__(self,air_date,episode_count,name,poster_path,season_number):
+    self.air_date = air_date
+    self.episode_count = episode_count
+    self.name = name
+    self.poster_path = 'https://image.tmdb.org/t/p/w500/'+poster_path
+    self.season_number = season_number
 
 
 # MOVIES
@@ -79,7 +87,7 @@ def tube(request,movie_id):
     origin = c.get('origin_country')
     company_object = Company(name = name, logo = logo, origin = origin)
     production_companies_name.append(company_object)
-  print(movie_reviews)
+
   context = {
 
     'youtube_video_id':youtube_video_id,
@@ -105,6 +113,10 @@ series_details_url='https://api.themoviedb.org/3/tv/{}?api_key={}'
 
 series_tube_id='https://api.themoviedb.org/3/tv/{}/videos?api_key={}'
 
+series_review_url='https://api.themoviedb.org/3/tv/{}/reviews?api_key={}'
+
+series_similar_url='https://api.themoviedb.org/3/tv/{}/similar?api_key={}'
+
 # Searies view function
 
 def series(request):
@@ -129,10 +141,76 @@ def series_tube(request,movie_id):
 
   series_id_details = series_details(series_details_url,movie_id)
   youtube_video_series_id = series_trailer_id(series_tube_id,movie_id)
-  print(youtube_video_series_id)
+  series_reviews = get_series_reviews(series_review_url,movie_id)
+  similar_movies = getSeries(series_similar_url,movie_id)
+
+  all_genres = []
+  production_companies_name = []
+  creators = []
+  aired_seasons = []
+
+  try:
+    genre = series_id_details['genres']
+
+    for g in genre:
+      name = g.get('name')
+      all_genres.append(name)
+
+  except:
+    all_genres = None
+
+  try:
+    companies = series_id_details['production_companies']
+
+    for c in companies:
+      name = c.get('name')
+      logo = c.get('logo_path')
+      origin = c.get('origin_country')
+      company_object = Company(name = name, logo = logo, origin = origin)
+      production_companies_name.append(company_object)
+
+  except:
+    production_companies_name = None
+
+
+  try:
+    created_by = series_id_details['created_by']
+
+    for creator in created_by:
+      name = creator.get('name')
+      creators.append(name)
+  except:
+    creators = None
+
+
+  try:
+    seasons = series_id_details['seasons']
+
+
+    for season in seasons:
+      air_date = season.get('air_date')
+      episode_count = season.get('episode_count')
+      name = season.get('name')
+      poster_path = season.get('poster_path')
+      season_number = season.get('season_number')
+
+      season_obj = Season(air_date,episode_count,name,poster_path,season_number)
+
+      aired_seasons.append(season_obj)
+  except:
+    aired_seasons = None
+
+
   context = {
     'series_id_details':series_id_details,
     'youtube_video_series_id':youtube_video_series_id,
+    'all_genres':all_genres,
+    'production_companies_name':production_companies_name,
+    # 'countries':countries,
+    'similar_movies':similar_movies,
+    'series_reviews':series_reviews,
+    'creators':creators,
+    'aired_seasons':aired_seasons,
   }
 
   return render(request,'series_play.html',context)

@@ -4,6 +4,8 @@
 
 {% block styles %}
 {{block.super}}
+<link rel="stylesheet" href="{% static 'css/series_play.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
 
 {% endblock styles %}
 
@@ -22,6 +24,259 @@
   </div>
 
 </div>
+
+<div class="container-fluid mt-3">
+  <div class="row mt-3">
+    <div class="col-md-4 mt-3">
+      <div class="card border-success mb-3 poster" style="max-width: 18rem;">
+        <div class="card-body">
+          {% if series_id_details.backdrop_path %}
+          <img src="https://image.tmdb.org/t/p/w500/{{series_id_details.backdrop_path}}"
+            alt="{{series_id_details.backdrop_path}}" height=100% width=100% class="card-img">
+          {% else %}
+          <img src="https://image.tmdb.org/t/p/w500/{{the_movie_details.poster_path}}"
+            alt="{{series_id_details.poster_path}}" height="200" width="120" class="card-img">
+          {% endif %}
+        </div>
+      </div>
+      <p class="text-center text-monospace genre">
+        Production Companies
+      </p>
+      <p class="text-center text-monospace genre">
+        {% if production_companies_name %}
+        {% for company in production_companies_name %}
+
+        {{company.name|title}} ~ {{company.origin|title}},
+
+        {% endfor %}
+        {% endif %}
+      </p>
+      <!-- {% if creators %}
+      <p class="text-center text-monospace genre">
+        Creators
+      </p>
+      <p class="text-center text-monospace genre">
+        {% for editor in creators %}
+
+        {{editor.name|title}},
+
+        {% endfor %}
+      </p>
+      {% endif %} -->
+      <p class="text-center text-monospace genre">
+        Number Of Episodes : {{series_id_details.number_of_episodes}}
+      </p>
+      <p class="text-center text-monospace genre">
+        Number Of Seasons : {{series_id_details.number_of_seasons}}
+      </p>
+    </div>
+    <div class="col-md-4 mt-3 middle">
+      <p class="text-center text-monospace">
+        {{series_id_details.name|upper}}
+      </p>
+      <p class="text-center text-monospace">
+        {{series_id_details.overview|title}}
+      </p>
+      <p class="text-center text-monospace">
+        To view the original homepage of {{series_id_details.original_title}} got to
+        <a href="{{series_id_details.homepage}}" target="blank">{{series_id_details.homepage}}</a>
+      </p>
+      <p class="text-center text-monospace">
+        Duration : {{series_id_details.runtime}} mins
+      </p>
+      <p class="text-center text-monospace">
+        Release Date : {{series_id_details.first_air_date}}
+      </p>
+      <p class="text-center text-monospace">
+        Countries Producers :
+        {% if countries %}
+        {% for country in countries %}
+
+        {{country}},
+
+        {% endfor %}
+        {% endif %}
+      </p>
+    </div>
+    <div class="col-md-4 mt-3 middle">
+      <p class="text-center text-monospace">
+        Genres :
+      </p>
+      <p class="text-center text-monospace">
+        {% if all_genres %}
+        {% for genre in all_genres %}
+
+        {{genre}},
+
+        {% endfor %}
+        {% endif %}
+      </p>
+      <p class="text-center text-monospace">
+        Original Language : "{{series_id_details.original_language}}"
+      </p>
+      {% if series_id_details.status == Released %}
+      <p class="text-center text-monospace" style="color: green;">
+        Status : {{series_id_details.status}}
+      </p>
+      {% else %}
+      <p class="text-center text-monospace">
+        Status : {{series_id_details.status}}
+      </p>
+      {% endif %}
+
+      <!-- rating stars -->
+
+      <div class="stars text-center">
+        {% if series_id_details.vote_average >= 2 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if series_id_details.vote_average >= 4 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if series_id_details.vote_average >= 6 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if series_id_details.vote_average >= 8 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+        {% if series_id_details.vote_average >= 10 %}
+        <i class="fas fa-star " style="color:yellow"></i>
+        {% else %}
+        <i class="fas fa-star " style="color:gray"></i>
+        {% endif %}
+      </div>
+
+      <p class="text-center text-monospace">
+        Ratings : {{series_id_details.vote_average}}
+      </p>
+      <p class="text-center text-monospace">
+        Total votes : {{series_id_details.vote_count}}
+      </p>
+      <p class="text-center text-monospace">
+        In Production : {{series_id_details.in_production}}
+      </p>
+      <p class="text-center text-monospace">
+        Last Air Date : {{series_id_details.last_air_date}}
+      </p>
+    </div>
+  </div>
+</div>
+
+{% if aired_seasons %}
+
+<div class="container">
+  <h4 class="text-center text-monospace" style="color: white;">SEASONS</h4>
+
+  <div class="card-columns ">
+    {% for season in aired_seasons %}
+
+    <div class="card poster">
+      <p class="text-center text-monospace">
+        {{season.name}}
+      </p>
+      <img src="{{season.poster_path}}" alt="{{season.name}}" height=50% width=50% class="img-responsive card-img-top">
+      <p class="text-monospace">
+        Aired On : {{season.air_date}}
+      </p>
+      <p class="text-monospace">
+        Number Of Episodes : {{season.episode_count}}
+      </p>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endif %}
+
+<!-- Series Reviews -->
+
+{% if movie_reviews %}
+<div class="container mt-3 genre">
+  <h1 class="text-center text-monospace">
+    {{series_id_details.name|title}} Reviews
+  </h1>
+  <div class="row reviews">
+
+    {% for review in series_reviews %}
+
+    <div class="card-body">
+      <p class="text-monospace" > 
+        {{review.author}}
+      </p>
+      <P class="text-monospace" >
+        {{review.content|slice:"300"}} ...
+      </P>
+      <P class="text-monospace" >
+        <a href="{{review.url}}" target="_blank" rel="noopener noreferrer"> Full Review</a>
+      </P>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+
+<!-- Similar Series  -->
+
+{% if similar_movies %}
+<div class="container genre">
+  <h1 class="text-center text-monospace">SIMILAR SERIES</h1>
+
+  <div class="card-columns">
+    {% for m in similar_movies %}
+    <div class="card">
+      <img src="{{m.poster_path}}" alt="{{m.original_title}}" class="img-responsive card-img-top">
+      <div class="main">
+        <div class="content text-monospace">
+          <h6>{{m.original_title}}</h6>
+          <div class="stars">
+            {% if m.vote_average >= 2 %}
+            <i class="fas fa-star " style="color:yellow"></i>
+            {% else %}
+            <i class="fas fa-star " style="color:gray"></i>
+            {% endif %}
+            {% if m.vote_average >= 4 %}
+            <i class="fas fa-star " style="color:yellow"></i>
+            {% else %}
+            <i class="fas fa-star " style="color:gray"></i>
+            {% endif %}
+            {% if m.vote_average >= 6 %}
+            <i class="fas fa-star " style="color:yellow"></i>
+            {% else %}
+            <i class="fas fa-star " style="color:gray"></i>
+            {% endif %}
+            {% if m.vote_average >= 8 %}
+            <i class="fas fa-star " style="color:yellow"></i>
+            {% else %}
+            <i class="fas fa-star " style="color:gray"></i>
+            {% endif %}
+            {% if m.vote_average >= 10 %}
+            <i class="fas fa-star " style="color:yellow"></i>
+            {% else %}
+            <i class="fas fa-star " style="color:gray"></i>
+            {% endif %}
+          </div>
+          <small class="text-monospace"> {{m.overview}}</small>
+          <a href="{% url 'series_tube' movie_id=m.id %}">
+            <button class="btn btn-success btn-sm text-monospace">Watch Trailer Now</button>
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
 
 
 <!-- Youtube Iframe -->
@@ -73,4 +328,3 @@
 </script>
 
 {% endblock %}
-

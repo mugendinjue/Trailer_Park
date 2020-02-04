@@ -52,3 +52,19 @@ def series_details(url,movie_id):
   data = response.json()
 
   return data
+
+def get_series_reviews(url,movie_id):
+  complete_url = url.format(movie_id,api_key)
+  response = requests.get(complete_url)
+  data = response.json()
+
+  reviews = []
+  for review in data['results']:
+    author = review.get('author')
+    content = review.get('content')
+    url = review.get('url')
+
+    new_review = Reviews(author = author, content = content, url = url)
+    reviews.append(new_review)
+
+  return reviews
