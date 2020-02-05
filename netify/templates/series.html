@@ -55,7 +55,7 @@
         <i class="fas fa-star " style="color:gray"></i>
         {% endif %}
       </div>
-      <small class="text-monospace"> {{m.overview}}</small>
+      <small class="text-monospace"> {{m.overview|slice:"200"}} ...</small>
         <a href="{% url 'series_tube' movie_id=m.id %}">
           <button class="btn btn-success btn-sm text-monospace">Watch Trailer Now</button>
         </a>
@@ -104,7 +104,7 @@
         <i class="fas fa-star " style="color:gray"></i>
         {% endif %}
       </div>
-      <small class="text-monospace"> {{m.overview}}</small>
+      <small class="text-monospace"> {{m.overview|slice:"200"}} ...</small>
         <a href="{% url 'series_tube' movie_id=m.id %}">
           <button class="btn btn-success btn-sm text-monospace">Watch Trailer Now</button>
         </a>
@@ -155,7 +155,7 @@
         <i class="fas fa-star " style="color:gray"></i>
         {% endif %}
       </div>
-      <small class="text-monospace"> {{m.overview}}</small>
+      <small class="text-monospace"> {{m.overview|slice:"200"}} ...</small>
         <a href="{% url 'series_tube' movie_id=m.id %}">
           <button class="btn btn-success btn-sm text-monospace">Watch Trailer Now</button>
         </a>
@@ -206,7 +206,7 @@
         <i class="fas fa-star " style="color:gray"></i>
         {% endif %}
       </div>
-      <small class="text-monospace"> {{m.overview}}</small>
+      <small class="text-monospace"> {{m.overview|slice:"200"}} ...</small>
         <a href="{% url 'series_tube' movie_id=m.id %}">
           <button class="btn btn-success btn-sm text-monospace">Watch Trailer Now</button>
         </a>

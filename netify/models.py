@@ -36,3 +36,22 @@ class Reviews:
     self.author = author
     self.content = content
     self.url = url
+
+
+# companies object
+
+class Company:
+  def __init__(self,name,logo,origin):
+    self.name = name
+    self.logo = logo
+    self.origin = origin
+
+# seasons object
+
+class Season:
+  def __init__(self,air_date,episode_count,name,poster_path,season_number):
+    self.air_date = air_date
+    self.episode_count = episode_count
+    self.name = name
+    self.poster_path = 'https://image.tmdb.org/t/p/w500/'+poster_path
+    self.season_number = season_number
