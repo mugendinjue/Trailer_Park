@@ -13,7 +13,6 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'bootstrap4',
@@ -66,8 +65,6 @@ DATABASES = {
     )
 }
 
-db_env = dj_database_url.config(conn_max_age=500)  
-DATABASES['default'].update(db_env)  
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 AUTH_PASSWORD_VALIDATORS = [
