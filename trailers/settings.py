@@ -1,12 +1,17 @@
-import os
-from decouple import config
-import dj_database_url
+import os  
+  
+import dj_database_url  
+import django_heroku  
+from decouple import config, Csv  
+from dotenv import load_dotenv  
+  
+load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = config('DEBUG')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -61,6 +66,9 @@ DATABASES = {
     )
 }
 
+db_env = dj_database_url.config(conn_max_age=500)  
+DATABASES['default'].update(db_env)  
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 AUTH_PASSWORD_VALIDATORS = [
     {
