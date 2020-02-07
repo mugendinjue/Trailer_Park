@@ -57,11 +57,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'trailers.wsgi.application'
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=config('DATABASE_URL')
+#     )
+# }
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
