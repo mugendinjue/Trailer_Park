@@ -3,9 +3,7 @@ import os
 import dj_database_url  
 import django_heroku  
 from decouple import config, Csv  
-from dotenv import load_dotenv  
   
-load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

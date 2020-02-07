@@ -51,18 +51,6 @@
         {% endfor %}
         {% endif %}
       </p>
-      <!-- {% if creators %}
-      <p class="text-center text-monospace genre">
-        Creators
-      </p>
-      <p class="text-center text-monospace genre">
-        {% for editor in creators %}
-
-        {{editor.name|title}},
-
-        {% endfor %}
-      </p>
-      {% endif %} -->
       <p class="text-center text-monospace genre">
         Number Of Episodes : {{series_id_details.number_of_episodes}}
       </p>
@@ -306,6 +294,14 @@
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
+      },
+      playerVars: {
+        'autoplay': 1,
+        'loop': 1,
+        'color': 'white',
+        'playlist': '{{youtube_video_series_id}}',
+        'modestbranding': 1,
+        'iv_load_policy': 3
       }
     });
   }
@@ -317,7 +313,6 @@
 
   function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING && !done) {
-      setTimeout(stopVideo, null);
       done = true;
     }
   }

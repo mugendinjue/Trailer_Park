@@ -167,81 +167,80 @@ def series(request):
 
 # Trailer
 def series_tube(request,movie_id):
+
+  series_id_details = series_details(series_details_url,movie_id)
+  youtube_video_series_id = series_trailer_id(series_tube_id,movie_id)
+  series_reviews = get_series_reviews(series_review_url,movie_id)
+  similar_movies = getSeries(series_similar_url,movie_id)
+
+  all_genres = []
+  production_companies_name = []
+  creators = []
+  aired_seasons = []
+
   try:
-    series_id_details = series_details(series_details_url,movie_id)
-    youtube_video_series_id = series_trailer_id(series_tube_id,movie_id)
-    series_reviews = get_series_reviews(series_review_url,movie_id)
-    similar_movies = getSeries(series_similar_url,movie_id)
+    genre = series_id_details['genres']
 
-    all_genres = []
-    production_companies_name = []
-    creators = []
-    aired_seasons = []
+    for g in genre:
+      name = g.get('name')
+      all_genres.append(name)
 
-    try:
-      genre = series_id_details['genres']
-
-      for g in genre:
-        name = g.get('name')
-        all_genres.append(name)
-
-    except:
-      all_genres = None
-
-    try:
-      companies = series_id_details['production_companies']
-
-      for c in companies:
-        name = c.get('name')
-        logo = c.get('logo_path')
-        origin = c.get('origin_country')
-        company_object = Company(name = name, logo = logo, origin = origin)
-        production_companies_name.append(company_object)
-
-    except:
-      production_companies_name = None
-
-
-    try:
-      created_by = series_id_details['created_by']
-
-      for creator in created_by:
-        name = creator.get('name')
-        creators.append(name)
-    except:
-      creators = None
-
-
-    try:
-      seasons = series_id_details['seasons']
-
-
-      for season in seasons:
-        air_date = season.get('air_date')
-        episode_count = season.get('episode_count')
-        name = season.get('name')
-        poster_path = season.get('poster_path')
-        season_number = season.get('season_number')
-
-        season_obj = Season(air_date,episode_count,name,poster_path,season_number)
-
-        aired_seasons.append(season_obj)
-    except:
-      aired_seasons = None
-
-
-    context = {
-      'series_id_details':series_id_details,
-      'youtube_video_series_id':youtube_video_series_id,
-      'all_genres':all_genres,
-      'production_companies_name':production_companies_name,
-      # 'countries':countries,
-      'similar_movies':similar_movies,
-      'series_reviews':series_reviews,
-      'creators':creators,
-      'aired_seasons':aired_seasons,
-    }
-
-    return render(request,'series_play.html',context)
   except:
-    return HttpResponse('There seems to be no internet connection')
+    all_genres = None
+
+  try:
+    companies = series_id_details['production_companies']
+
+    for c in companies:
+      name = c.get('name')
+      logo = c.get('logo_path')
+      origin = c.get('origin_country')
+      company_object = Company(name = name, logo = logo, origin = origin)
+      production_companies_name.append(company_object)
+
+  except:
+    production_companies_name = None
+
+
+  try:
+    created_by = series_id_details['created_by']
+
+    for creator in created_by:
+      name = creator.get('name')
+      creators.append(name)
+  except:
+    creators = None
+
+
+  try:
+    seasons = series_id_details['seasons']
+
+
+    for season in seasons:
+      air_date = season.get('air_date')
+      episode_count = season.get('episode_count')
+      name = season.get('name')
+      poster_path = season.get('poster_path')
+      season_number = season.get('season_number')
+
+      season_obj = Season(air_date,episode_count,name,poster_path,season_number)
+
+      aired_seasons.append(season_obj)
+  except:
+    aired_seasons = None
+
+
+  context = {
+    'series_id_details':series_id_details,
+    'youtube_video_series_id':youtube_video_series_id,
+    'all_genres':all_genres,
+    'production_companies_name':production_companies_name,
+    # 'countries':countries,
+    'similar_movies':similar_movies,
+    'series_reviews':series_reviews,
+    'creators':creators,
+    'aired_seasons':aired_seasons,
+  }
+
+  return render(request,'series_play.html',context)
+

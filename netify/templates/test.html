@@ -262,6 +262,14 @@
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
+      },
+      playerVars: {
+        'autoplay': 1,
+        'loop': 1,
+        'color': 'white',
+        'playlist': '{{youtube_video_id}}',
+        'modestbranding': 1,
+        'iv_load_policy': 3
       }
     });
   }
@@ -273,7 +281,6 @@
 
   function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING && !done) {
-      setTimeout(stopVideo, null);
       done = true;
     }
   }
