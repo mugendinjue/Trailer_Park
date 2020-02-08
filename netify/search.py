@@ -25,7 +25,7 @@ def searchMovies(url,search_type,search_name):
     vote_average = new_movie.get('vote_average')
     overview = new_movie.get('overview')
     release_date = new_movie.get('release_date')
-    if poster_path != None:
+    if poster_path != None and vote_average > 2:
       movie_object = Movies(popularity,vote_count,poster_path,id,original_language,original_title,vote_average,overview,release_date)
       list.append(movie_object)
     else: 
@@ -50,7 +50,7 @@ def searchSeries(url,search_type,search_name):
     vote_average = new_movie.get('vote_average')
     overview = new_movie.get('overview')
     release_date = new_movie.get('release_date')
-    if poster_path != None:
+    if poster_path != None and vote_average > 2:
       movie_object = Series(popularity,vote_count,poster_path,id,original_language,original_name,vote_average,overview,release_date)
       list.append(movie_object)
     else:
