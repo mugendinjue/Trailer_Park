@@ -15,7 +15,10 @@
     <div class="col-md-4">
 
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 mt-3">
+      <h2 class="text-center text-monospace">
+        Trailer Park
+      </h2>
       <h3 class="text-center text-monospace">
         Search Your Favourite Movie or Series
       </h3>
@@ -23,10 +26,16 @@
       <form class="mt-3" action="{% url 'search' %}">
         {% csrf_token %}
         <div class="form-group">
-          <label for="movieSearch"><small>Search a movie or a series you wish to view</small></label>
-          <input type="text" class="form-control"  placeholder="Search a Movie or Series" name="search_term">
+          <label for="movieSearch"><small class="text-monospace">Search a movie or a series you wish to view it's
+              trailer</small></label>
+          <label for="">
+            <small class="text-monospace">
+              (The search is best applicable for movies and series)
+            </small>
+          </label>
+          <input type="text" class="form-control" placeholder="Search a Movie or Series" name="search_term">
         </div>
-        <button type="submit" class="btn btn-outline-success" >Success</button>
+        <button type="submit" class="btn btn-outline-success">Search</button>
       </form>
 
     </div>

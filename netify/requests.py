@@ -69,17 +69,24 @@ def getMovies(category):
     
   return list
 
-# function that get the first trailer id
+# function that get the trailer id with the type Trailer
+
 def trailer_id(movie_id):
 
   trailers_url = movie_trailer.format(int(movie_id),api_key)
   response = requests.get(trailers_url)
-  data = response.json()
-  the_id = data['results'][0].get('key')
+  res = response.json()
+  for data in res['results']:
+    if data.get('type') == 'Trailer':
+      the_id = data.get('key')
+    else:
+      continue
+    
 
   return the_id
 
 # function that gets a specific movies details
+
 def movie_details(movie_id):
 
   details_url = movie_details_url.format(movie_id,api_key)

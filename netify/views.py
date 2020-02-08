@@ -4,11 +4,15 @@ from .series import getSeries,series_trailer_id,series_details,get_series_review
 from .search import searchMovies,searchSeries
 from .models import Reviews,Company,Season,Series,Movies
 
-# search_url
+
+# search_URL for both movies and series
 
 movie_search_url='https://api.themoviedb.org/3/search/{}?api_key={}&query={}'
 movie_search = 'movie'
 tv_search = 'tv'
+
+
+# Search function
 
 def search(request):
   if 'search_term' in request.GET and request.GET["search_term"]:
@@ -26,7 +30,7 @@ def search(request):
   else:
     return redirect(index)
 
-
+# Application webpage entry point
 
 def index(request):
   context = {
@@ -37,11 +41,7 @@ def index(request):
 
 
 # MOVIES
-
-
-
 # The home view function with movie posters
-
 def home(request):
 
   top_rated_movies = getMovies('top_rated')
@@ -72,7 +72,7 @@ def tube(request,movie_id):
   try:
     youtube_video_id = trailer_id(movie_id)
   except:
-    youtube_video_id = 'Service not available at the moment'
+    youtube_video_id = None
 
   try:
     similar_movies = get_similar_movies(movie_id)

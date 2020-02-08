@@ -38,12 +38,17 @@ def getSeries(url,category):
 
 
 # function that get the first trailer id
+
 def series_trailer_id(url,movie_id):
 
   trailers_url = url.format(int(movie_id),api_key)
   response = requests.get(trailers_url)
-  data = response.json()
-  the_id = data['results'][0].get('key')
+  res = response.json()
+  for data in res['results']:
+    if data.get('type') == 'Trailer':
+      the_id = data.get('key')
+    else:
+      continue
 
   return the_id
 

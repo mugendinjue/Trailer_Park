@@ -13,7 +13,6 @@ def searchMovies(url,search_type,search_name):
   complete_url = url.format(search_type,api_key,search_name)
   response = requests.get(complete_url)
   movies = response.json()
-  print(movies)
 
   list = []
   for new_movie in movies["results"]:

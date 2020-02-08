@@ -1,39 +1,41 @@
+<!-- Navbar Copy Pasted from bootstrap #badpractice-->
 
-
-<!-- The Navbar for the website -->
-<!-- 
-  
-  Will contain quicklinks such as
-  search
-  trending
- -->
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 
- <nav class="navbar navbar-expand-lg">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+    aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon" style="background-color: white;opacity: 0.8;border-radius: 10%;"></span>
   </button>
-  <a class="navbar-brand" href="{% url 'index' %}">HOME</a>
+  <a class="navbar-brand" href="#"></a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'home' %}">MOVIES<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'series' %}">SERIES<span class="sr-only">(current)</span></a>
+        <a class="nav-link text-monospace" href="{% url 'index' %}">HOME<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Trending</a>
+        <a class="nav-link text-monospace" href="{% url 'home' %}">MOVIES</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-monospace" href="{% url 'series' %}">SERIES</a>
+      </li>
+      <!-- Future implimentation -->
+
+      <!-- <li class="nav-item">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          href="#">Trending</a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#">All</a>
           <a class="dropdown-item" href="#">Movie</a>
           <a class="dropdown-item" href="#">Tv</a>
           <a class="dropdown-item" href="#">Person</a>
-        </div>
-      </li>
+        </div> 
+
+      </li> -->
+
     </ul>
   </div>
 </nav>
