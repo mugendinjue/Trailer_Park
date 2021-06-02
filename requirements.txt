@@ -12,7 +12,7 @@ python-dotenv==0.10.5
 requests==2.22.0
 soupsieve==1.9.5
 sqlparse==0.3.0
-urllib3==1.25.8
+urllib3==1.26.5
 whitenoise==5.0.1
 asgiref==3.2.10
 Django==3.1.1
